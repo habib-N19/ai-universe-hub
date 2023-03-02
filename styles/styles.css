@@ -1,0 +1,16 @@
+* {
+    /* border: 1px solid red; */
+    font-family: 'Work Sans', sans-serif;
+}
+
+.btn-modal {
+    background-color: #FEF7F7;
+    color: rgba(235, 87, 87, 1);
+    border-radius: 50%;
+    width: 35px;
+
+}
+
+.btn-modal svg {
+    /* width: 15px; */
+}
