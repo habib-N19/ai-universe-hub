@@ -11,6 +11,14 @@
 
 }
 
+/* .btn-modal-close {
+    background: #EB5757 !important;
+} */
+#btn-modal-close {
+    background-color: red !important;
+    color: white !important;
+}
+
 .btn-modal svg {
     /* width: 15px; */
 }

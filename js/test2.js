@@ -1,4 +1,4 @@
-// let data;
+// // let data;
 // let count = 6;
 // // fetching api
 // function loadData() {
@@ -13,17 +13,6 @@
 //         })
 
 // }
-// // sort function
-// function sortToolsByDate(data) {
-//     data.sort((a, b) => new Date(b.published_in) - new Date(a.published_in));
-//     displayData(data);
-// }
-// // sorting 
-// document.getElementById('btn-sort').addEventListener('click', function () {
-//     // console.log("hi");
-//     sortToolsByDate(data);
-// })
-
 
 // // display data on the page
 // const displayData = (data) => {
@@ -56,7 +45,7 @@
 
 //                     <div class="d-flex w-100 align-items-center">
 //                         <div style="width: 25px" class="">
-                           
+                            
 //                         </div>
 //                         <div id="release-date" class="ms-2 mt-1">${dataCards.published_in}</div>
 //                     </div>
@@ -64,7 +53,7 @@
 //                 <!-- modal button -->
 //                 <div class=" btn btn-modal rounded-circle" onclick="loadAiDetails('${dataCards.id}')" data-bs-toggle="modal"
 //                 data-bs-target="#btn-feature-modal">
-                  
+                    
 //                 </div>
 //             </div>
 //         </div>
