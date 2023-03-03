@@ -97,20 +97,33 @@ function displayAiDetails(data) {
     modalDescription.innerText = data.description;
     // pricing
     const pricingCards = document.querySelectorAll('.pricing-data');
-    pricingCards.forEach((card, index) => {
-        const pricing = data.pricing[index];
+    pricingCards.forEach((card) => {
+        const pricing = data.pricing[0];
         const plan = pricing.plan;
         const price = pricing.price;
         card.innerHTML = `
-        <p>${price}</p>
-        <p>${plan}</p>
-
+        <p>${price} <br> ${plan}</p>
         `
-
+    });
+    // modal features
+    const modalFeature = document.getElementById('modal-features');
+    modalFeature.textContent = '';
+    Object.values(data.features).forEach(feature => {
+        const featuresList = document.createElement('li');
+        const featureName = feature.feature_name;
+        featuresList.textContent = featureName;
+        modalFeature.appendChild(featuresList);
     })
 
 
-
+    // modal integration
+    const modalIntegration = document.getElementById('modal-integration');
+    modalIntegration.textContent = '';
+    for (const integrate of data.integrations) {
+        const integrateItem = document.createElement('li');
+        integrateItem.textContent = integrate;
+        modalIntegration.appendChild(integrateItem);
+    }
 
 
     // const pricingContainer = document.getElementById('pricing-container');
