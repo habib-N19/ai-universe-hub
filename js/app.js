@@ -194,10 +194,10 @@ function displayAiDetails(data) {
                                           </div>
                                                   ` : ''}
                             <div class="card-body">
-    <h4 class="card-text">
-        ${data.input_output_examples !== null ? data.input_output_examples[0].input : 'Not Yet!! Take a break'}
+    <h4 class="card-text fw-semibold">
+        ${data.input_output_examples !== null ? data.input_output_examples[0].input : 'Can you give any example?'}
     </h4>
-    <p> ${data.input_output_examples !== null ? data.input_output_examples[0].output : ''}</p>
+    <p> ${data.input_output_examples !== null ? data.input_output_examples[0].output : 'Not Yet!! Take a break'}</p>
 </div>
 										</div >
     `;
