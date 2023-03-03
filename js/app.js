@@ -122,14 +122,21 @@ function displayAiDetails(data) {
     modalDescription.innerText = data.description;
     // pricing
     const pricingCards = document.querySelectorAll('.pricing-data');
-    pricingCards.forEach((card) => {
-        const pricing = data.pricing[0];
-        const plan = pricing.plan;
-        const price = pricing.price;
-        card.innerHTML = `
-        <p>${price} <br> ${plan}</p>
-        `
-    });
+    if (data.pricing === null) {
+        pricingCards.forEach(card => {
+            card.innerHTML = `<p>Free of cost</p>`
+        })
+    }
+    else {
+        data.pricing.forEach((card, index) => {
+            const plan = card.plan;
+            const price = card.price ? card.price : "Contact us for pricing";
+            pricingCards[index].innerHTML = `
+              <p>${price} <br> ${plan}</p>
+            `;
+        });
+    }
+
     // modal features
     const modalFeature = document.getElementById('modal-features');
     modalFeature.textContent = '';
@@ -144,26 +151,29 @@ function displayAiDetails(data) {
     // modal integration
     const modalIntegration = document.getElementById('modal-integration');
     modalIntegration.textContent = '';
-    for (const integrate of data.integrations) {
-        const integrateItem = document.createElement('li');
-        integrateItem.textContent = integrate;
-        modalIntegration.appendChild(integrateItem);
-    };
+    if (data.integrations === null) {
+        modalIntegration.innerHTML = `<p>No integration available</p>`
+    } else {
+        for (const integrate of data.integrations) {
+            const integrateItem = document.createElement('li');
+            integrateItem.textContent = integrate;
+            modalIntegration.appendChild(integrateItem);
+        };
+    }
 
     // modal image section
     const modalImageContainer = document.getElementById('modal-image-container');
     modalImageContainer.textContent = '';
 
     const imageCardItems = document.createElement('div');
-    imageCardItems.innerHTML = `
-                                        <div class="position-relative">
+    imageCardItems.innerHTML = `  <div class="position-relative">
 											<img src="${data.image_link[0]}" class="card-img-top" alt="..." />
                                             <div class="position-absolute top-0 end-0 text-white bg-danger m-2 px-2 py-1">${data.accuracy.score * 100}<span>% accuracy</span></div>
 											<div class="card-body">
-												<h4 class="card-text">
-                                                ${data.input_output_examples[0].input}
-												</h4>
-                                                <p> ${data.input_output_examples[0].output}</p>
+                                            <h4 class="card-text">
+                                            ${data.input_output_examples !== null ? data.input_output_examples[0].input : 'Not Yet!! Take a break'}
+                                            </h4>
+                                            <p> ${data.input_output_examples !== null ? data.input_output_examples[0].output : ''}</p>
 											</div>
 										</div>
     `;

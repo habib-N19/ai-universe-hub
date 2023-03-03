@@ -1,4 +1,4 @@
-// // let allData;
+// // let data;
 // let count = 6;
 // // fetching api
 // function loadData() {
@@ -8,18 +8,18 @@
 //         .then(res => res.json())
 
 //         .then(data => {
-//             allData = data.data;
-//             displayData(allData);
+//             data = data.data;
+//             displayData(data);
 //         })
 
 // }
 
 // // display data on the page
-// const displayData = (allData) => {
+// const displayData = (data) => {
 //     const dataContainer = document.getElementById('data-container');
 //     dataContainer.innerHTML = '';
 
-//     for (const dataCards of allData.tools.slice(0, count)) {
+//     for (const dataCards of data.tools.slice(0, count)) {
 //         const dataCard = document.createElement('div');
 //         dataCard.classList.add('col');
 //         // console.log(dataCards.name);
@@ -45,8 +45,7 @@
 
 //                     <div class="d-flex w-100 align-items-center">
 //                         <div style="width: 25px" class="">
-
-//                         </div>
+                           
 //                         <div id="release-date" class="ms-2 mt-1">${dataCards.published_in}</div>
 //                     </div>
 //                 </div>
@@ -68,24 +67,25 @@
 //         seeMore.classList.add('d-none');
 //     } else {
 //         seeMore.classList.remove('d-none');
-//     }
+//     };
+//     // showing all info
+//     document.getElementById('btn-see-more').addEventListener('click', function () {
+//         count = data.tools.length;
+//         displayData(data);
+//         // console.log('see more clicked');
+//     })
 // }
 // const loadAiDetails = async id => {
 //     const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
 //     const response = await fetch(url);
-//     const allData = await response.json();
-//     console.log(allData.pricing[0].plan);
-//     displayAiDetails(data);
+//     const data = await response.json();
+//     // console.log(data.pricing[0].plan);
+//     displayAiDetails(data.data);
 
 // }
 
 
-// // showing all info
-// document.getElementById('btn-see-more').addEventListener('click', function () {
-//     count = allData.tools.length;
-//     displayData(allData);
-//     // console.log('see more clicked');
-// })
+
 
 // // display all data
 // function displayAiDetails(data) {
@@ -95,7 +95,7 @@
 //     modalDescription.innerText = data.description;
 //     // pricing
 //     const pricingCards = document.querySelectorAll('.pricing-data');
-//     pricingCards.forEach((card) => {
+//     data.pricing.forEach((card) => {
 //         const pricing = data.pricing[0];
 //         const plan = pricing.plan;
 //         const price = pricing.price;
