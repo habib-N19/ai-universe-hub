@@ -1,24 +1,31 @@
+let data;
+let count = 6;
 // fetching api
 function loadData() {
     const url = 'https://openapi.programming-hero.com/api/ai/tools';
 
     fetch(url)
         .then(res => res.json())
-        .then(data => displayData(data.data))
+
+        .then(data => {
+            data = data.data;
+            displayData(data);
+        })
 
 }
 
 // display data on the page
 const displayData = (data) => {
     const dataContainer = document.getElementById('data-container');
-    for (const dataCards of data.tools) {
-        // listItems(data);
+    dataContainer.innerHTML = '';
+
+    for (const dataCards of data.tools.slice(0, count)) {
         const dataCard = document.createElement('div');
         dataCard.classList.add('col');
         // console.log(dataCards.name);
         dataCard.innerHTML = `
         <div class="card h-100">
-            <img src="${dataCards.image}" class="card-img-top" alt="..." />
+            <img src="${dataCards.image}" class="card-img-top p-3" alt="..." />
             <div class="card-body">
                 <h5 class="card-title">Features</h5>
                 <ol id="features-list" >
@@ -81,6 +88,19 @@ const displayData = (data) => {
 
         dataContainer.appendChild(dataCard);
     }
+    // hiding btn after data all loaded
+    const seeMore = document.getElementById('see-more')
+    if (count > 6) {
+        seeMore.classList.add('d-none');
+    } else {
+        seeMore.classList.remove('d-none');
+    };
+    // showing all info
+    document.getElementById('btn-see-more').addEventListener('click', function () {
+        count = data.tools.length;
+        displayData(data);
+        // console.log('see more clicked');
+    })
 }
 const loadAiDetails = async id => {
     const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
@@ -90,6 +110,11 @@ const loadAiDetails = async id => {
     displayAiDetails(data.data);
 
 }
+
+
+
+
+// display all data
 function displayAiDetails(data) {
     // console.log(data.description);
 
