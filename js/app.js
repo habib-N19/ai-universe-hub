@@ -123,21 +123,27 @@ function displayAiDetails(data) {
         const integrateItem = document.createElement('li');
         integrateItem.textContent = integrate;
         modalIntegration.appendChild(integrateItem);
-    }
+    };
+
+    // modal image section
+    const modalImageContainer = document.getElementById('modal-image-container');
+    modalImageContainer.textContent = '';
+
+    const imageCardItems = document.createElement('div');
+    imageCardItems.innerHTML = `
+                                        <div class="position-relative">
+											<img src="${data.image_link[0]}" class="card-img-top" alt="..." />
+                                            <div class="position-absolute top-0 end-0 text-white bg-danger m-2 px-2 py-1">${data.accuracy.score * 100}<span>% accuracy</span></div>
+											<div class="card-body">
+												<h4 class="card-text">
+                                                ${data.input_output_examples[0].input}
+												</h4>
+                                                <p> ${data.input_output_examples[0].output}</p>
+											</div>
+										</div>
+    `;
+    modalImageContainer.appendChild(imageCardItems)
+    console.log();
 
 
-    // const pricingContainer = document.getElementById('pricing-container');
-    // const priceDiv = document.createElement('div');
-    // priceDiv.innerHTML = `${data.pricing.map(price => price.plan, price.price)}`
-    // pricingContainer.innerHTML = `
-
-    // `;
-    // pricingContainer.appendChild(priceDiv)
-
-
-    // const modalContainer = document.getElementById('modal-container');
-    // const div = document.createElement('div');
-    // div.innerHTML = `
-
-    // `
 }
