@@ -4,33 +4,53 @@ function loadData() {
 
     fetch(url)
         .then(res => res.json())
-        .then(data => displayData(data.data))
+        .then(data => {
+            displayData(data.data);
+            // listItems(data.data);
+        })
+
 }
 
 // display data on the page
 const displayData = (data) => {
     const dataContainer = document.getElementById('data-container');
     for (const dataCards of data.tools) {
+        // listItems(data);
         const dataCard = document.createElement('div');
         dataCard.classList.add('col');
         // console.log(dataCards.name);
+        function listItems() {
+            for (const dataCard of dataCards.features) {
+                console.log(dataCard);
+                const featureList = document.getElementById('features-list');
+                const li = document.createElement('li');
+                console.log(li);
+                li.innerText += `${dataCard}`;
+                featureList.appendChild(li);
+
+            }
+
+        }
 
         dataCard.innerHTML = `
         <div class="card h-100">
             <img src="${dataCards.image}" class="card-img-top" alt="..." />
             <div class="card-body">
                 <h5 class="card-title">Features</h5>
-                <ul id="features-list">
-                
-                </ul>
+                <ol id="features-list" >
+                ${dataCards.features.map(feature => `<li>${feature}</li>`).join('')}
+                </ol>
 
+            </div>
+            <div class="text-black container px-3">
+                     <hr>
             </div>
             <!-- card footer -->
             <div
-                class="px-4 my-3 d-flex justify-content-between align-items-center"
+                class="px-4 mb-4 d-flex justify-content-between align-items-center"
             >
                 <div>
-                    <h5 id="card-footer-title">${dataCards.name}</h5>
+                    <h5 id="card-footer-title " class="mb-3">${dataCards.name}</h5>
 
                     <div class="d-flex w-100 align-items-center">
                         <div style="width: 25px" class="">
@@ -74,20 +94,6 @@ const displayData = (data) => {
 
 `;
 
-        function listItems() {
-            const featuresList = document.getElementById('features-list');
-            const li = document.createElement('li');
-            const features = dataCards.features;
-            features.map((feature) => {
-                li.innerText = feature;
-                featuresList.appendChild(li);
-
-            });
-        }
-        listItems();
         dataContainer.appendChild(dataCard);
-
-
-
     }
 }
