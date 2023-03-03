@@ -4,10 +4,7 @@ function loadData() {
 
     fetch(url)
         .then(res => res.json())
-        .then(data => {
-            displayData(data.data);
-            // listItems(data.data);
-        })
+        .then(data => displayData(data.data))
 
 }
 
@@ -19,19 +16,6 @@ const displayData = (data) => {
         const dataCard = document.createElement('div');
         dataCard.classList.add('col');
         // console.log(dataCards.name);
-        function listItems() {
-            for (const dataCard of dataCards.features) {
-                console.log(dataCard);
-                const featureList = document.getElementById('features-list');
-                const li = document.createElement('li');
-                console.log(li);
-                li.innerText += `${dataCard}`;
-                featureList.appendChild(li);
-
-            }
-
-        }
-
         dataCard.innerHTML = `
         <div class="card h-100">
             <img src="${dataCards.image}" class="card-img-top" alt="..." />
@@ -73,7 +57,8 @@ const displayData = (data) => {
                     </div>
                 </div>
                 <!-- modal button -->
-                <div class="btn-modal">
+                <div class=" btn btn-modal rounded-circle" onclick="loadAiDetails('${dataCards.id}')" data-bs-toggle="modal"
+                data-bs-target="#btn-feature-modal">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -96,4 +81,50 @@ const displayData = (data) => {
 
         dataContainer.appendChild(dataCard);
     }
+}
+const loadAiDetails = async id => {
+    const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    // console.log(data.pricing[0].plan);
+    displayAiDetails(data.data);
+
+}
+function displayAiDetails(data) {
+    // console.log(data.description);
+
+    const modalDescription = document.getElementById('card-description');
+    modalDescription.innerText = data.description;
+    // pricing
+    const pricingCards = document.querySelectorAll('.pricing-data');
+    pricingCards.forEach((card, index) => {
+        const pricing = data.pricing[index];
+        const plan = pricing.plan;
+        const price = pricing.price;
+        card.innerHTML = `
+        <p>${price}</p>
+        <p>${plan}</p>
+
+        `
+
+    })
+
+
+
+
+
+    // const pricingContainer = document.getElementById('pricing-container');
+    // const priceDiv = document.createElement('div');
+    // priceDiv.innerHTML = `${data.pricing.map(price => price.plan, price.price)}`
+    // pricingContainer.innerHTML = `
+
+    // `;
+    // pricingContainer.appendChild(priceDiv)
+
+
+    // const modalContainer = document.getElementById('modal-container');
+    // const div = document.createElement('div');
+    // div.innerHTML = `
+
+    // `
 }
