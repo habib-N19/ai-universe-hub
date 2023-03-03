@@ -3,12 +3,15 @@ let count = 6;
 // fetching api
 function loadData() {
     const url = 'https://openapi.programming-hero.com/api/ai/tools';
-
+    // show loading screen
+    toggleLoader(true)
     fetch(url)
         .then(res => res.json())
         .then(data => {
             data = data.data;
             displayData(data);
+            // hide loading screen
+            toggleLoader(false);
         })
 
 }
@@ -84,7 +87,7 @@ const displayData = (data) => {
         </div>
 
 `;
-
+        // toggleLoader(false);
         dataContainer.appendChild(dataCard);
     }
     // hiding btn after data all loaded
@@ -99,22 +102,25 @@ const displayData = (data) => {
         data.tools.sort((a, b) => new Date(a.published_in) - new Date(b.published_in)); // sorting by date
         displayData(data);
     });
-    // loader
-    const toggleLoader = isLoading => {
-        const loaderSection = document.getElementById('loader');
-        if (isLoading) {
-            loaderSection.classList.remove('d-none');
-        }
-        else {
-            loaderSection.classList.add('d-none')
-        }
-    }
+
     // showing all info
     document.getElementById('btn-see-more').addEventListener('click', function () {
         count = data.tools.length;
+        toggleLoader(true);
         displayData(data);
+        toggleLoader(false);
         // console.log('see more clicked');
     })
+}
+// loader
+const toggleLoader = isLoading => {
+    const loaderSection = document.getElementById('loader');
+    if (isLoading) {
+        loaderSection.classList.remove('d-none');
+    }
+    else {
+        loaderSection.classList.add('d-none')
+    }
 }
 const loadAiDetails = async id => {
     const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;

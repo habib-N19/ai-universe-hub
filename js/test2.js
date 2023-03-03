@@ -1,15 +1,18 @@
-// // let data;
+// let data;
 // let count = 6;
 // // fetching api
 // function loadData() {
 //     const url = 'https://openapi.programming-hero.com/api/ai/tools';
-
+//     // show loading screen
+//     const loaderSection = document.getElementById('loader');
+//     loaderSection.classList.remove('d-none');
 //     fetch(url)
 //         .then(res => res.json())
-
 //         .then(data => {
 //             data = data.data;
 //             displayData(data);
+//             // hide loading screen
+//             toggleLoader(false);
 //         })
 
 // }
@@ -45,7 +48,7 @@
 
 //                     <div class="d-flex w-100 align-items-center">
 //                         <div style="width: 25px" class="">
-                            
+                         
 //                         </div>
 //                         <div id="release-date" class="ms-2 mt-1">${dataCards.published_in}</div>
 //                     </div>
@@ -53,13 +56,13 @@
 //                 <!-- modal button -->
 //                 <div class=" btn btn-modal rounded-circle" onclick="loadAiDetails('${dataCards.id}')" data-bs-toggle="modal"
 //                 data-bs-target="#btn-feature-modal">
-                    
+              
 //                 </div>
 //             </div>
 //         </div>
 
 // `;
-
+//         // toggleLoader(false);
 //         dataContainer.appendChild(dataCard);
 //     }
 //     // hiding btn after data all loaded
@@ -69,10 +72,27 @@
 //     } else {
 //         seeMore.classList.remove('d-none');
 //     };
+//     // sorting by date on button click
+//     document.getElementById('btn-sort').addEventListener('click', function () {
+//         data.tools.sort((a, b) => new Date(a.published_in) - new Date(b.published_in)); // sorting by date
+//         displayData(data);
+//     });
+//     // loader
+//     const toggleLoader = isLoading => {
+//         const loaderSection = document.getElementById('loader');
+//         if (isLoading) {
+//             loaderSection.classList.remove('d-none');
+//         }
+//         else {
+//             loaderSection.classList.add('d-none')
+//         }
+//     }
 //     // showing all info
 //     document.getElementById('btn-see-more').addEventListener('click', function () {
 //         count = data.tools.length;
+//         toggleLoader(true);
 //         displayData(data);
+//         toggleLoader(false);
 //         // console.log('see more clicked');
 //     })
 // }
